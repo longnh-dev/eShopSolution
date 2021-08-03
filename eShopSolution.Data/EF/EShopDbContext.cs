@@ -1,5 +1,7 @@
 ﻿using eShopSolution.Data.Configruations;
 using eShopSolution.Data.Entities;
+using eShopSolution.Data.Enums;
+using eShopSolution.Data.Extentions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,8 @@ namespace eShopSolution.Data.EF
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //Configure using Fluent API
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new CartConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
@@ -30,7 +34,8 @@ namespace eShopSolution.Data.EF
             modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
-            //  base.OnModelCreating(modelBuilder);
+
+           modelBuilder.Seed();
         }
 
         public DbSet<Product> Products { get; set; }
@@ -41,7 +46,7 @@ namespace eShopSolution.Data.EF
         public DbSet<Cart> Carts { get; set; }
 
         public DbSet<CategoryTranslation> CategoryTranslations { get; set; }
-      //  public DbSet<ProductInCategory> ProductInCategories { get; set; }
+        public DbSet<ProductInCategory> ProductInCategories { get; set; }
 
         public DbSet<Contact> Contacts { get; set; }
 

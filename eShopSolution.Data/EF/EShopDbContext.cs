@@ -1,7 +1,7 @@
 ﻿using eShopSolution.Data.Configruations;
 using eShopSolution.Data.Entities;
 using eShopSolution.Data.Enums;
-using eShopSolution.Data.Extentions;
+//using eShopSolution.Data.Extentions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -35,7 +35,7 @@ namespace eShopSolution.Data.EF
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
 
-           modelBuilder.Seed();
+           //modelBuilder.Seed();
         }
 
         public DbSet<Product> Products { get; set; }

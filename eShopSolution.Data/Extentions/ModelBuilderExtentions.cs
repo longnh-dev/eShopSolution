@@ -1,6 +1,6 @@
 ﻿using eShopSolution.Data.Entities;
 using eShopSolution.Data.Enums;
-//using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -86,9 +86,8 @@ namespace eShopSolution.Data.Extentions
             modelBuilder.Entity<ProductInCategory>().HasData(
                 new ProductInCategory() { ProductId = 1, CategoryId = 1 }
                 );
-            /*
-            var roleId = new Guid("2F618986-90BC-42A8-A2C2-FA55F2450380");
-            var adminId = new Guid("BC3D3BC5-F94E-4BD3-8B38-CE3E5E366C06");
+            var roleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
+            var adminId = new Guid("69BD714F-9576-45BA-B5B7-F00649BE00DE");
             modelBuilder.Entity<AppRole>().HasData(new AppRole
             {
                 Id = roleId,
@@ -115,7 +114,7 @@ namespace eShopSolution.Data.Extentions
             {
                 RoleId = roleId,
                 UserId = adminId
-            }); */
+            }); 
         }
     }
 }

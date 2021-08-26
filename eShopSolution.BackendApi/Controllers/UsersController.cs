@@ -17,6 +17,7 @@ namespace eShopSolution.BackendApi.Controllers
             _userService = userService;
         }
 
+        //signin module
         [HttpPost("authenticate")]
         [AllowAnonymous]
         public async Task<IActionResult> Authenticate([FromForm] LoginRequest request)
@@ -31,6 +32,7 @@ namespace eShopSolution.BackendApi.Controllers
             return Ok(new { token = resultToken });
         }
 
+        //Register module
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromForm] RegisterRequest request)
@@ -40,7 +42,7 @@ namespace eShopSolution.BackendApi.Controllers
             var result = await _userService.Register(request);
             if (!result)
             {
-                return BadRequest("Register unsuccessful.");
+                return BadRequest("Register Unsuccessful.");
             }
             return Ok();
         }

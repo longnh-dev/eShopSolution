@@ -10,6 +10,8 @@ namespace eShopSolution.BackendApi.Controllers
 {   //api/product
     [Route("api/[controller]")]
     [ApiController]
+
+    //not allow query data when u not login user
     [Authorize]
     public class ProductsController : ControllerBase
     {

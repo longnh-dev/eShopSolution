@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eShopSolution.ViewModels.Common
+namespace eShopSolution.Application.Common
 {
-    public class RequestBase
+    class ApiResult
     {
-        public string BearerToken { get; set; }
     }
 }

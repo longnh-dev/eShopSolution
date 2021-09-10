@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eShopSolution.ViewModels.Common
+namespace eShopSolution.ViewModels.System.Users
 {
-    public class RequestBase
+    public class UserDeleteRequest
     {
-        public string BearerToken { get; set; }
+        public Guid Id { get; set; }
     }
 }

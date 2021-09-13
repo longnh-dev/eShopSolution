@@ -5,12 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace eShopSolution.AminApp.Controllers
@@ -26,7 +21,7 @@ namespace eShopSolution.AminApp.Controllers
             _configuration = configuration;
         }
 
-        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 2)
+        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
         {
             var request = new GetUserPagingRequest()
             {
@@ -35,6 +30,7 @@ namespace eShopSolution.AminApp.Controllers
                 PageSize = pageSize
             };
             var data = await _userApiClient.GetUsersPaging(request);
+            ViewBag.Keyword = keyword;
             return View(data.ResultObj);
         }
 
@@ -68,20 +64,24 @@ namespace eShopSolution.AminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
+            
             var result = await _userApiClient.GetById(id);
-            if (result.IsSuccessed)
-            {
-                var user = result.ResultObj; var updateRequest = new UserUpdateRequest()
+                if (result.IsSuccessed)
                 {
-                    Dob = user.Dob,
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    PhoneNumber = user.PhoneNumber,
-                    Id = id
-                };
-                return View(updateRequest);
-            }
+                    var user = result.ResultObj;
+                    var updateRequest = new UserUpdateRequest()
+                    {
+                        Id = user.Id,
+                        Dob = user.Dob,
+                        Email = user.Email,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        PhoneNumber = user.PhoneNumber
+                        
+                    };
+                    return View(updateRequest);
+                }
+            
             return RedirectToAction("Error", "Home");
         }
 
@@ -104,7 +104,7 @@ namespace eShopSolution.AminApp.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Remove("Token");
-            return RedirectToAction("Login", "User");
+            return RedirectToAction("Index", "Login");
         }
 
         [HttpGet]
